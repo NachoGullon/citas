@@ -1,0 +1,20 @@
+<h1>Inicio Sesión</h1>
+<form [formGroup]="formularioLogin">
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="formularioLogin.get('email').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input matInput formControlName="password">
+    <mat-error *ngIf="formularioLogin.get('password').hasError('required')">Este Campo es Obligatorio</mat-error>
+    <mat-error *ngIf="formularioLogin.get('password').hasError('minlength')">Mínimo tres caracteres</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary"[disabled]="formularioLogin.invalid" (click)="recogeFormulario()">Entrar</button>
+</form>
+<pre>
+    {{formularioLogin.value | json}}
+</pre>

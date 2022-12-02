@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-title>{{familiar.nombre}}</mat-card-title>
+    <mat-card-subtitle>{{familiar.paciente}}</mat-card-subtitle>
+    <mat-card-subtitle>{{familiar.hospital}}</mat-card-subtitle>
+    <mat-card-subtitle>{{familiar.email}}</mat-card-subtitle>
+    
+    
+    <mat-card-actions *ngIf="!modoLectura">
+      <button  mat-raised-button color="primary" (click)="solicitaVisita()">Pedir Visita</button>
+      <button mat-raised-button color="accent">Consultar Visita</button>
+      <button mat-raised-button color="accent" (click)="editarFamiliar()">Editar</button>
+    </mat-card-actions>
+  </mat-card>

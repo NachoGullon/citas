@@ -1,0 +1,47 @@
+<form [formGroup]="formularioDoctor">
+    <mat-form-field appearance="fill">
+        <mat-label>Introduzca Nombre</mat-label>
+        <input matInput formControlName="nombre">
+        <mat-error *ngIf="formularioDoctor.get('nombre').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Password</mat-label>
+        <input matInput formControlName="password">
+        <mat-error *ngIf="formularioDoctor.get('password').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Hospital</mat-label>
+        <input matInput formControlName="hospital">
+        <mat-error *ngIf="formularioDoctor.get('hospital').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Turno</mat-label>
+        <input matInput formControlName="turno">
+        <mat-error *ngIf="formularioDoctor.get('turno').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Apellidos</mat-label>
+        <input matInput formControlName="apellidos">
+        <mat-error *ngIf="formularioDoctor.get('apellidos').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Especialidad</mat-label>
+        <input matInput formControlName="especialidad">
+        <mat-error *ngIf="formularioDoctor.get('especialidad').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+      <!-- Operador ternario   -->
+      <button mat-raised-button color="primary"[disabled]="formularioDoctor.invalid" (click)="recogeFormulario()">
+        {{estoyEditando == true? 'Editar' : 'Crear'}}</button>
+    </form>
+    <pre>
+        {{formularioDoctor.value | json}}
+    </pre>
+    <!-- Enseña la card cuando esté completa y Pasamos modo lectura-->
+    <app-carta-doctor [doctor]="doctorCreado" *ngIf="doctorCreado" [modoLectura]="true"></app-carta-doctor>
+  
+    

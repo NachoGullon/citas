@@ -1,0 +1,40 @@
+<form [formGroup]="visitaFamiliar">
+    <mat-form-field appearance="fill">
+        <mat-label>Introduzca Nombre</mat-label>
+        <input matInput formControlName="nombre">
+        <mat-error *ngIf="visitaFamiliar.get('nombre').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Paciente</mat-label>
+        <input matInput formControlName="paciente">
+        <mat-error *ngIf="visitaFamiliar.get('paciente').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Hospital</mat-label>
+        <input matInput formControlName="hospital">
+        <mat-error *ngIf="visitaFamiliar.get('hospital').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Introduzca Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="visitaFamiliar.get('hospital').hasError('required')">Este Campo es Obligatorio</mat-error>
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary"[disabled]="visitaFamiliar.invalid" (click)="recogeFormulario()">Crear</button>
+    </form>
+    <pre>
+        {{visitaFamiliar.value | json}}
+    </pre>
+    <!-- Enseña la card cuando esté completa y Pasamos modo lectura-->
+  <app-carta-familiar [familiar]="familiarCreado" *ngIf="familiarCreado" [modoLectura]="true"></app-carta-familiar>
+
+  <app-tabla-generica [datos]="datosFamiliar"
+  [columnas]="['Nombre', 'Paciente', 'Hospital', 'Email']"
+  [modelo]="['nombre', 'paciente', 'hospital', 'email']" ></app-tabla-generica>
+  
+    
+
