@@ -9,9 +9,9 @@ export class AuthGuard implements CanActivate {
   constructor(private _snackBar: MatSnackBar, private router: Router) {}
 
   canActivate(): boolean {
-    const token: string = sessionStorage.getItem('token');
+    const usuarioConectado: string = localStorage.getItem('usuarioConectado');
 
-    if (token) {
+    if (usuarioConectado) {
       return true;
     } else {
       this._snackBar.open('Debe iniciar sesión antes', 'cerrado');

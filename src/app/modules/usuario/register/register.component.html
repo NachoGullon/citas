@@ -27,6 +27,16 @@
     <mat-error *ngIf="formRegister.get('password2').hasError('minlength')">Mínimo tres caracteres</mat-error>
   </mat-form-field>
 
+  
+<mat-form-field appearance="fill">
+  <mat-label>Elige Opción</mat-label>
+  <mat-select formControlName="rol">
+    <mat-option value="3">Paciente</mat-option>
+    <mat-option value="2">Doctor</mat-option>
+  </mat-select>
+  <mat-error *ngIf="formRegister.get('rol').hasError('required')">Este Campo es Obligatorio</mat-error>
+</mat-form-field>
+
   <button mat-raised-button color="primary"[disabled]="formRegister.invalid" (click)="recogeFormulario()">Registrar</button>
 </form>
 <pre>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FamiliarService } from 'src/app/services/familiar.service';
 import { Familiar } from '../../../interface/Familiar';
@@ -13,6 +14,7 @@ import { SharedService } from '../../../services/shared.service';
 export class VisitaFamiliarComponent implements OnInit {
   visitaFamiliar: FormGroup;
   familiarCreado: Familiar;
+  estoyEditando: boolean = false;
   datosFamiliar: Familiar[] = [
     {
       nombre: 'Alonso',
@@ -30,13 +32,15 @@ export class VisitaFamiliarComponent implements OnInit {
   ];
  
 
-  constructor(private sharedService: SharedService, private router: Router, private familiarService: FamiliarService) {
+  constructor(private sharedService: SharedService, private router: Router, private familiarService: FamiliarService,  private _snackBar: MatSnackBar,) {
     // Añadimos titulo de nuestro shared
-    this.sharedService.tituloWeb.next('Visitas');
+    this.sharedService.tituloWeb.next('visitaFamiliar');
   }
 
   ngOnInit(): void {
+    
     this.visitaFamiliar = new FormGroup({
+      id: new FormControl(null),
       nombre: new FormControl(null, [Validators.required]),
       paciente: new FormControl(null, [Validators.required]),
       hospital: new FormControl(null, [Validators.required]),
@@ -54,7 +58,21 @@ export class VisitaFamiliarComponent implements OnInit {
     if (this.visitaFamiliar.valid) {
       const familiarCreado: Familiar = this.visitaFamiliar.value;
       this.familiarCreado = familiarCreado;
+
+      if (this.estoyEditando) {
+        this.familiarService.acutalizoFamiliar(familiarCreado).subscribe(()=>{
+          this._snackBar.open(
+            `Se ha actualizado doctor correctamente ${this.familiarCreado.nombre}`
+          );
+        }); 
+      } else {
+        this.familiarService.crearFamiliar(familiarCreado).subscribe((familiarBBDD) => {
+          this._snackBar.open(
+            `Se ha creado familiar en BBDD ${familiarBBDD.nombre}`
+          );
+        });
+      }
     }
   }
-  
-}
+    }
+

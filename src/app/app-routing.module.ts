@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: 'formularioDoctor',
     component: FormularioDoctorComponent,
+    canActivate: [AuthGuard],
     title: 'Formulario Doctor',
   },
  

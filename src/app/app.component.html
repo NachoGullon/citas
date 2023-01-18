@@ -15,11 +15,12 @@
     <mat-drawer #drawer class="example-sidenav" mode="side">
       <!--Enlaces de la web-->
 
-      <div class="elementoEnlace" [routerLink]="['usuario/login']">Inicio sesión</div>
-      <div class="elementoEnlace" [routerLink]="['usuario/register']">Registro</div>
-      <div class="elementoEnlace" [routerLink]="['control']">Panel de Control</div>
-      <div class="elementoEnlace" [routerLink]="['formularioDoctor']">Creación Doctor</div>
-      <div class="elementoEnlace" [routerLink]="['familia/visitaFamiliar']">Visita Familiar</div>
+      <div *ngIf="!usuarioService.getUserConnected()" class="elementoEnlace" [routerLink]="['usuario/login']">Inicio sesión</div>
+      <div *ngIf="!usuarioService.getUserConnected()" class="elementoEnlace" [routerLink]="['usuario/register']">Registro</div>
+      <div *ngIf="usuarioService.getUserConnected()" class="elementoEnlace" [routerLink]="['control']">Panel de Control</div>
+      <div *ngIf="usuarioService.isAdmin()"  class="elementoEnlace" [routerLink]="['formularioDoctor']">Creación Doctor</div>
+      <div *ngIf="usuarioService.getUserConnected()" class="elementoEnlace" [routerLink]="['familia/visitaFamiliar']">Visita Familiar</div>
+      <div *ngIf="usuarioService.getUserConnected()" class="elementoEnlace"(click)= "usuarioService.cerrarSesion()">Cerrar sesión</div>
     </mat-drawer>
   
     <div class="example-sidenav-content">

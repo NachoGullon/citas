@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Familiar } from '../interface/Familiar';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ export class FamiliarService {
   familiaresBBDD: Familiar[] = [];
   familiarEditado: Familiar;
 
-  constructor() {
+  apiFamiliares: string = 'familiarapi'
+  constructor(private restservice: RestService,private spinner: NgxSpinnerService) {
     const familiar1 = {
       nombre: 'Alonso',
       paciente: 'Belén',
@@ -35,9 +38,9 @@ export class FamiliarService {
     const cookieFamiliares: string = localStorage.getItem('cookieFamiliares');
     //preguntamos si esciste
     if (cookieFamiliares) {
-      //Si existe hacemos que la BBDD sea el valo de la galleta
+      //Si existe hacemos que la BBDD sea el valor de la galleta
       this.familiaresBBDD = JSON.parse(cookieFamiliares);
-      //Sino exitia
+      //Sino existia
     } else {
       //creamos galleta con valores de fabrica
       localStorage.setItem(
@@ -48,44 +51,62 @@ export class FamiliarService {
   }
 
   //Creación  y envio Observable
-  recuperarDoctores(): Observable<Familiar[]> {
-    return new Observable((observer) => {
-      setTimeout(() => {
-        observer.next(this.familiaresBBDD);
+  recuperarFamiliar(): Observable<any[]> {
+    /** spinner starts on init */
+    this.spinner.show();
+
+   return new Observable((observer) => {
+      this.restservice.peticionHttp(this.apiFamiliares, 'GET').subscribe(familiares => {
+        observer.next(familiares);
         observer.complete();
-      }, 3000);
+        //Ocultamos el spinner
+        this.spinner.hide();
+      })
     });
   }
-  creaFamiliar(familiarCreado: Familiar): Observable<Familiar> {
-    return new Observable((observer) => {
-      setTimeout(() => {
-        this.familiaresBBDD.push(familiarCreado);
-        this.sincronizaCookie();
-        observer.next(familiarCreado);
-        observer.complete();
-      }, 3000);
-    });
+  crearFamiliar(familiarCreado: Familiar): Observable<Familiar> {
+     /** spinner starts on init */
+     this.spinner.show();
+
+     return new Observable((observer) => {
+       this.restservice.peticionHttp(this.apiFamiliares, 'POST', familiarCreado).subscribe(familiar => {
+         observer.next(familiar);
+         observer.complete();
+         //Ocultamos el spinner
+         this.spinner.hide();
+       })
+     });
   }
 
-  //Creamos  funcion para que borre de la array el familiar recibido
-  borraFamiliar(familiarBorrado: Familiar): Observable<void> {
-    return new Observable((observer) => {
-      setTimeout(() => {
-        //indexOf Nos devuelve la posición del array que queremos
+ //Creamos  funcion para que borre de la array el doctor recibido
+ borraFamiliar(familiarBorrado: Familiar): Observable<void> {
+  /** spinner starts on init */
+  this.spinner.show();
 
-        const posicionFamiliar: number =
-          this.familiaresBBDD.indexOf(familiarBorrado);
-        this.familiaresBBDD.splice(posicionFamiliar, 1);
-        this.sincronizaCookie();
-        observer.next(null);
-        observer.complete();
-      }, 3000);
-    });
-  }
-  //Va actualizar y sincronizar la cookie
-  sincronizaCookie() {
-    localStorage.setItem('cookieFamiliares', JSON.stringify(this.familiaresBBDD));
-  }
+  return new Observable((observer) => {
+    this.restservice.peticionHttp(this.apiFamiliares + '?id='+ familiarBorrado.id, 'DELETE').subscribe(familiar => {
+      observer.next(familiar);
+      observer.complete();
+      //Ocultamos el spinner
+      this.spinner.hide();
+    })
+  });
+}
+//Va actualizar y sincronizar la cookie
+sincronizaCookie() {
+  localStorage.setItem('cookieFamiliares', JSON.stringify(this.familiaresBBDD));
+}
   // Para actualizar familiar.
-  acutalizoFamiliar(familiarActualiza: Familiar) {}
+  acutalizoFamiliar(familiarActualiza: Familiar) {
+    this.spinner.show();
+
+    return new Observable((observer) => {
+      this.restservice.peticionHttp(this.apiFamiliares, 'PUT', familiarActualiza).subscribe(familiar => {
+        observer.next(familiar);
+        observer.complete();
+        //Ocultamos el spinner
+        this.spinner.hide();
+      })
+    });
+  }
 }

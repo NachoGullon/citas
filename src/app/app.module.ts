@@ -24,6 +24,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from './modules/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SolicitaCitaComponent } from './solicita-cita/solicita-cita.component';
+import { GestionaCitasComponent } from './gestiona-citas/gestiona-citas.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SolicitaCitaComponent } from './solicita-cita/solicita-cita.component';
     CartaDoctorComponent,
     FormularioDoctorComponent,
     SolicitaCitaComponent,
+    GestionaCitasComponent,
     
   
   ],

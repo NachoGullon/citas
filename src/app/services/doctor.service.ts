@@ -42,7 +42,7 @@ export class DoctorService {
     const cookieDoctores: string = localStorage.getItem('cookieDoctores');
     //preguntamos si existe
     if (cookieDoctores) {
-      //Si existe hacemos que la BBDD sea el valo de la galleta
+      //Si existe hacemos que la BBDD sea el valor de la galleta
       this.doctoresBBDD = JSON.parse(cookieDoctores);
       //Sino exitia
     } else {

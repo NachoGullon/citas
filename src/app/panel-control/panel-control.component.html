@@ -20,6 +20,9 @@
   *ngFor="let doctor of doctores"
   [doctor]="doctor"
   (citaSolicitada)="procesaNuevaCita(doctor)"
+  (doctorBorrado)="procesaBorradoDoctor(doctor)"
+  (consultaSolicitada)="procesaConsultaDoctor (doctor)"
+  
 ></app-carta-doctor>
 <div style="clear:both"></div>
 <app-tabla-generica 

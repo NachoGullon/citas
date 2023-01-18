@@ -6,10 +6,10 @@
     <mat-card-subtitle>{{doctor.especialidad}}</mat-card-subtitle>
     
     <mat-card-actions *ngIf="!modoLectura">
-      <button  mat-raised-button color="primary" (click)="solicitaCita()">Pedir cita</button>
-      <button mat-raised-button color="accent">Consultar cita</button>
-      <button mat-raised-button color="warn" (click)="borrarDoctor()">Borrar</button>
-      <button mat-raised-button color="accent" (click)="editarDoctor()">Editar</button>
+      <button  *ngIf="usuarioService.isPaciente()" mat-raised-button color="primary" (click)="solicitaCita()">Pedir cita</button>
+      <button mat-raised-button color="accent" (click)="consultaCita()">Consultar cita</button>
+      <button *ngIf="usuarioService.isAdmin()" mat-raised-button color="warn" (click)="borrarDoctor()">Borrar</button>
+      <button *ngIf="permisoEdicion" mat-raised-button color="accent" (click)="editarDoctor()">Editar</button>
       
     </mat-card-actions>
   </mat-card>

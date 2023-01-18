@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CitasService } from '../../../services/citas.service';
 
 @Component({
   selector: 'app-tabla-generica',
@@ -10,6 +11,9 @@ export class TablaGenericaComponent implements OnInit {
   @Input() datos: any [];
   @Input() columnas: string [];
   @Input() modelo: string [];
+  @Input() acciones: boolean;
+  @Output() eliminar : EventEmitter <any> = new EventEmitter();
+  @Output() editar : EventEmitter <any> = new EventEmitter();
 
    
    
@@ -21,4 +25,17 @@ export class TablaGenericaComponent implements OnInit {
     console.log(this.modelo);
   }
 
+   // Llamamos a borrar
+   eliminarElemento(elemento: any){
+    this.eliminar.emit(elemento)
+    };
+
+  
+  //Llamamos a Editar cita
+  editarElemento(elemento : any){
+   this.editar.emit(elemento)
+  };
 }
+
+
+

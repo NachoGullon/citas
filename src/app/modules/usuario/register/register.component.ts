@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
       name: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null,[Validators.required,Validators.minLength(3)]),
-      password2: new FormControl(null,[Validators.required,Validators.minLength(3)])
+      password2: new FormControl(null,[Validators.required,Validators.minLength(3)]),
+      rol: new FormControl(null,[Validators.required])
     });
   }
   recogeFormulario(){
@@ -37,13 +38,15 @@ export class RegisterComponent implements OnInit {
       const miEmail: string = this.formRegister.get('email').value;
       const miPassword: string = this.formRegister.value.password;
       const miPassword2: string = this.formRegister.value.password2;
+      const miRol: string = this.formRegister.value.rol;
       console.log (miEmail+"--"+miPassword+"--"+miPassword2);
       
       const usuario: Usuario = {
         nombre: miName,
         email: miEmail,
         password: miPassword,
-        password2:miPassword2
+        password2:miPassword2,
+        rol: miRol
     
        }
        this.usuarioService.crearUsuario(usuario).subscribe(usuarioBBDD =>{
