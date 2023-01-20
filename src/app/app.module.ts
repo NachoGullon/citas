@@ -25,6 +25,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SolicitaCitaComponent } from './solicita-cita/solicita-cita.component';
 import { GestionaCitasComponent } from './gestiona-citas/gestiona-citas.component';
+import { CartaIndependienteComponent } from './carta-independiente/carta-independiente.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { GestionaCitasComponent } from './gestiona-citas/gestiona-citas.componen
    SharedModule,
     NgxSpinnerModule,
     HttpClientModule,
+    CartaIndependienteComponent
   ],
   providers: [DoctorService, FamiliarService],
   bootstrap: [AppComponent],

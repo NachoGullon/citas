@@ -16,14 +16,14 @@
   </mat-card>
   -->
   <!-- Le envia la info a carta doctor-->
-<app-carta-doctor
+<app-carta-independiente
   *ngFor="let doctor of doctores"
   [doctor]="doctor"
   (citaSolicitada)="procesaNuevaCita(doctor)"
   (doctorBorrado)="procesaBorradoDoctor(doctor)"
   (consultaSolicitada)="procesaConsultaDoctor (doctor)"
   
-></app-carta-doctor>
+></app-carta-independiente>
 <div style="clear:both"></div>
 <app-tabla-generica 
 *ngIf="doctores"

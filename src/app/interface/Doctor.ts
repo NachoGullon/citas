@@ -5,6 +5,6 @@ export interface Doctor{
     especialidad: string,
     turno: string,
     hospital: string,
-    //Propiedad opcional: ?
+    //Propiedad opcional: ?, != no es igual , || Or , == es igual., & junta los tipos 
     tieneCoche?: boolean
 }
