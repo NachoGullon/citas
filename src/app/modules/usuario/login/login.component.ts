@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         if(usuario){
            // Logica de inicio sesión 
         this._snackBar.open('Datos correctos','cerrado');
-        sessionStorage.setItem('token', '1')
+      
         this.router.navigate(['control']);
         }else{
           this._snackBar.open('Datos incorrectos', 'cerrado');

@@ -4,6 +4,7 @@ export interface Usuario{
     nombre: string,
     password: string,
     password2: string,
+    rol: string,
     
     //Propiedad opcional: ?
     tieneCoche?: boolean

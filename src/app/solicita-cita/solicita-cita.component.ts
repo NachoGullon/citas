@@ -37,7 +37,7 @@ export class SolicitaCitaComponent implements OnInit {
     const cita : Cita = {
       idDoctor: this.doctor.id,
       idPaciente: 1,
-      fecha: fecha,
+      fecha: fecha.toISOString(),
       motivo: motivo
       
     }

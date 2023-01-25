@@ -29,7 +29,6 @@ export class FormularioDoctorComponent implements OnInit {
     this.formularioDoctor = new FormGroup({
       id: new FormControl(null),
       nombre: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
       apellidos: new FormControl(null, [Validators.required]),
       turno: new FormControl(null, [Validators.required]),
       especialidad: new FormControl(null, [Validators.required]),

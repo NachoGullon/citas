@@ -4,6 +4,10 @@
         <div *ngFor="let titulo of columnas" class="elementoEncabezado pointer">
             <span>{{titulo}}</span>
         </div>
+        <div *ngIf="acciones" class="elementoEncabezado pointer">
+            <span>acciones disponibles</span>
+        </div>
+
     </div>
 
     <!-- Contenido de la tabla -->
@@ -12,6 +16,11 @@
             <div *ngFor="let atributo of modelo" class="elementoContenido">
                 {{elemento[atributo]}}
             </div>
+            <div *ngIf="acciones" class="elementoContenido">
+                <button mat-raised-button color="primary" (click)="editarElemento(elemento)">Editar</button>
+                <button mat-raised-button color="warn" (click)="eliminarElemento(elemento)">Eliminar</button>
+            </div>
+
         </div>
     </div>
 

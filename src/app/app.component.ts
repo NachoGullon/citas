@@ -13,7 +13,7 @@ import { Doctor } from './interface/Doctor';
 })
 export class AppComponent {
   tituloBarra : string;
-  constructor (private doctorService: DoctorService,private sharedService: SharedService, private usuarioService: UsuarioService){
+  constructor (private doctorService: DoctorService,private sharedService: SharedService, public usuarioService: UsuarioService){
    this.usuarioService.recuperarUsuarioId(2).subscribe(usuarios =>{
     console.log(usuarios);
    })

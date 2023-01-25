@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Cita Obtenida</h2>
+<mat-dialog-content class="mat-typography">
+
+  <app-tabla-generica 
+*ngIf="citas"
+[datos]="citas"
+[columnas]="[ 'Paciente', 'Fecha','Motivo']"
+[modelo]="['nombre', 'fecha', 'motivo']"
+[acciones]= "true"
+(editar)="editarCita($event)"
+(eliminar)="eliminarCita($event)"
+></app-tabla-generica>
+    
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="aceptar()">Aceptar</button>
+  <button mat-button cdkFocusInitial (click)="cancelar()">Cancelar</button>
+</mat-dialog-actions>
+

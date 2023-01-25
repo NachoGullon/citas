@@ -13,6 +13,8 @@ import { TablaGenericaComponent } from './tabla-generica/tabla-generica.componen
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
@@ -30,7 +32,8 @@ const modulosParaCompartir = [
   MatCardModule,
   MatDialogModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSelectModule
 ]
 
 @NgModule({

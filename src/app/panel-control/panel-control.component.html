@@ -16,18 +16,22 @@
   </mat-card>
   -->
   <!-- Le envia la info a carta doctor-->
-<app-carta-doctor
+  <!-- En la versión 15.1 no es necesario usar el cierre de la etiqueta. ejemplo app-carta-independiente-->
+<app-carta-independiente
   *ngFor="let doctor of doctores"
   [doctor]="doctor"
   (citaSolicitada)="procesaNuevaCita(doctor)"
-></app-carta-doctor>
+  (doctorBorrado)="procesaBorradoDoctor(doctor)"
+  (consultaSolicitada)="procesaConsultaDoctor (doctor)"
+  
+/>
 <div style="clear:both"></div>
 <app-tabla-generica 
 *ngIf="doctores"
 [datos]="doctores"
 [columnas]="['Nombre', 'Apellidos', 'Hospital','Turno','Especialidad']"
 [modelo]="['nombre', 'apellidos', 'hospital', 'turno', 'especialidad']"
-></app-tabla-generica>
+/>
 
 
 

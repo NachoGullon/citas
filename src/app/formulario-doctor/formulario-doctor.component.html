@@ -6,12 +6,6 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Introduzca Password</mat-label>
-        <input matInput formControlName="password">
-        <mat-error *ngIf="formularioDoctor.get('password').hasError('required')">Este Campo es Obligatorio</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
         <mat-label>Introduzca Hospital</mat-label>
         <input matInput formControlName="hospital">
         <mat-error *ngIf="formularioDoctor.get('hospital').hasError('required')">Este Campo es Obligatorio</mat-error>
