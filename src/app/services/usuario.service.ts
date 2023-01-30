@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { RestService } from './rest.service';
 import { Usuario } from '../interface/Usuario';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class UsuarioService {
   apiUsuarios: string = 'usuarioapi'
   usuarioConectado: Usuario;
-  constructor(private restservice: RestService, private spinner: NgxSpinnerService, private router : Router) {
+  constructor(private restservice: RestService, private spinner: NgxSpinnerService, private router : Router, private _snackBar: MatSnackBar) {
 
   }
   //Creación  y envio Observable
@@ -153,6 +154,19 @@ export class UsuarioService {
     cerrarSesion(){
       localStorage.clear()
       this.router.navigate(['usuario/login']);
+    }
+    // Para comprobar si el usuarios está conectado, se ejecuta el routing de angular 14
+    isLoged() : boolean{
+      const usuarioConectado: string = localStorage.getItem('usuarioConectado');
+
+      if (usuarioConectado) {
+        return true;
+      } else {
+        this._snackBar.open('Debe iniciar sesión antes', 'cerrado');
+        this.router.navigate(['usuario/login']);
+  
+        return false;
+      }
     }
 
 }

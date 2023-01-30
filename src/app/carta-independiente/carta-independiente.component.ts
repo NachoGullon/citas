@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
@@ -8,10 +8,12 @@ import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-carta-independiente',
+  // el atributo standalone hace que un compoenente o pipe o directiva sea totalmente independiente, es decir no tenga que ser puesta en ningún declaration de los modulos
+  // funciona de la siguiente manera: parte de cero, se le va especificando exactamente lo que qnecesita
+  //para luego poder utilizar este comp se puede importar en otros comp standalone o en mpodulos normales mediante el array de imports.
   standalone: true,
   imports: [NgIf,MatCardModule],
   providers:[DoctorService, UsuarioService],
-  
   templateUrl: './carta-independiente.component.html',
   styleUrls: ['./carta-independiente.component.scss']
 })
@@ -25,12 +27,11 @@ export class CartaIndependienteComponent implements OnInit {
   @Output()consultaSolicitada : EventEmitter < void > = new EventEmitter();
   @Input() modoLectura : boolean = false;
 
+  // Inject: Inyectar clases. Normalemnte usado por las clsases de angular o services
   permisoEdicion : boolean = false;
- constructor(private doctorService: DoctorService, private router : Router, public usuarioService : UsuarioService) { }
-
- 
- 
-
+  doctorService: DoctorService = inject(DoctorService);
+  router : Router = inject(Router);
+  usuarioService : UsuarioService = inject(UsuarioService);
 
  ngOnInit(): void {
  
